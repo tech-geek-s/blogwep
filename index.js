@@ -37,19 +37,28 @@ newclient.save(function(err){
   }
 })
 
-})
+});
 app.post("/signin",function(req,res){
-  const username=req.body.eml;
-  const password=req.body.pass;
-  Client.findOne({email:username},function(err,findClient){
+  const username=req.body.email;
+  const password=req.body.password;
+  Client.findOne({email:username},function(err,findclient){
     if(!err){
-      if(findClient.password===password){
+      if(findclient.password==password){
         console.log("found");
+        res.render("signup");
+      }
+      else{
+
+        const notfound="incorrect username or password";
+        res.render("signin", {inc: notfound});
       }
     }
-    else{console.log("notfound")}
+
+    else{
+    console.log(err)
+  }
   })
-})
+});
 
 app.listen(3000,function(){
   console.log("server started")
