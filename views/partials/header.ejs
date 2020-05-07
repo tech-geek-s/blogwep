@@ -8,16 +8,41 @@
       <script src="js/uikit-icons.min.js"></script>
     <title></title>
     <link rel="stylesheet" href="/css/styles.css">
+
     <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700|Roboto+Condensed:400,700,700i&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
   </head>
   <body>
-    <div class="container">
-      <h1>Blog<b class="wep">wep</b></h1>
-      <div class="buttons">
-
-<span><button type="button" name="button" class="btn" onclick="location.href='/signup'"> Home</button></span>
-<span><button type="button" name="button" class="btn">Contact</button></span>
-<span><button type="button" name="button" class="btn" onclick="location.href='/signup'">signup/signin</button></span>
-
+    <div class='box' id="box"></div>
+<div class="words display-1 p-5 position-relative d-none">
+   Hello.
 </div>
-    </div>
+    <nav class="navbar navbar-expand-lg navbar-light " style="background-color: #e3f2fd; ">
+
+      <a class="navbar-brand" href="#"><b>B</b>log  <b>W</b>ep</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/signup">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+  <button class="btn btn-outline-info my-2 my-sm-0"  onclick="window.location.href='/signup'">signin/signup</button>
+        </ul>
+
+      </div>
+
+
+    </nav>

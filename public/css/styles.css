@@ -63,11 +63,12 @@ padding-top: 5px;
 }
 .formsignindiv{
   margin: 0 auto;
-  position: absolute;
+  position: fixed;
 display: inline-block;
 margin-left: 40%;
 margin-top: 5%;
-background-color: #f4a548;
+margin-bottom: 1%;
+ background-image: linear-gradient(to right, rgba(255,0,0,0), rgb(245,252,193));
 padding: 50px 50px;
 padding-bottom: 70px;
 box-shadow: 0px 10px 15px 5px rgba(0,0,0,0.2);
@@ -81,7 +82,7 @@ input{
     font-family: 'Roboto Condensed', sans-serif;
     font-weight: 800;
   display: block;
-border:3px solid #ccc;
+border:2px solid grey;
 border-radius: 7px;
 
   padding:15px 25px;
@@ -89,7 +90,7 @@ border-radius: 7px;
   position: relative;
 }
 .formsignin input:focus{
- border: 3px solid #363062;
+ border: 3px solid #ff5722;
  -webkit-transition: 0.5s;
 transition: 0.5s;
 }
@@ -103,17 +104,34 @@ transition: 0.5s;
   border-radius: 4px;
 }
 .submitbutton{
+  margin-top: 2px;
     font-family: 'Roboto Condensed', sans-serif;
     font-weight: bold;
+font-size: 1.2rem;
+letter-spacing: 0.5px;
   height: 50px;
   width: 100%;
-  background-color: #000000;
-  color: white;
-  border:3px solid #dd2c00;
+background-image: linear-gradient(to right, rgba(255,0,0,0), rgb(152,214,234));
+  color: black;
+  border:3px solid grey;
+    border-radius: 4px;
 }
+.formsignin button:hover{
+  background-color: red;
+   -webkit-transition: 1s;
+  transition: 1s;
+
+}
+.formsignin a{
+  position: absolute;
+  top: 415px;
+  left: 110px;
+}
+
 footer{
+
   padding-top: 10px;
-  position:fixed;
+  position: fixed;
  left:0;
  bottom: 0;
  text-align: center;

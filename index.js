@@ -8,7 +8,7 @@ const app=express();
 app.set('view engine', 'ejs')
 app.use(bodyparser.urlencoded({extended:true}))
 app.use(express.static("public"));
-
+const inc=0;
 mongoose.connect("mongodb://localhost:27017/blogwebdb",{useNewUrlParser:true});
 const clientinfo={
   email:String,
@@ -41,6 +41,7 @@ newclient.save(function(err){
 app.post("/signin",function(req,res){
   const username=req.body.email;
   const password=req.body.password;
+var notfound="sorry not valid user";
   Client.findOne({email:username},function(err,findclient){
     if(!err){
       if(findclient.password==password){
@@ -48,9 +49,7 @@ app.post("/signin",function(req,res){
         res.render("signup");
       }
       else{
-
-        const notfound="incorrect username or password";
-        res.render("signin", {inc: notfound});
+      res.render("signin",{var1:notfound});
       }
     }
 
