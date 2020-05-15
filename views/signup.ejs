@@ -1,21 +1,30 @@
 <%- include("partials/header") -%>
 
-<form class="formsignin" action="/signup" method="post">
+<form class="formsignin" action="/signup" method="post" data-aos="zoom-out">
+  <h1>Sign <span>Up</span></h1>
+<table>
+<tr>
 
+<td>
   <div class="formsignindiv">
 <center>
-<h1>Sign <span>Up</span></h1>
-
-
 <input type="email"    name="eml"   placeholder="Enter Your Email">
 <input type="password" name="pass"  placeholder="Password">
 <input type="password" name="pass1" placeholder="Confirm Password">
 <a href="/signin"> signin instead?</a>
-<button type="submit" name="button" class="submitbutton">Submit</button>
+<button type="submit" name="button" class="btn btn-info">Submit</button>
 </center>
     </div>
-</form>
+    </td>
+<div class="formsignindiv2">
 
+
+  <td>Facebook Google APIS</td>
+  </div>
+    </tr>
+
+    </table>
+</form>
 
 
 <%- include("partials/footer") -%>

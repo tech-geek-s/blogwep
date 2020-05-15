@@ -1,5 +1,5 @@
-const inc=""
-const notfound="not a valid user"
+const var1="";
+const notfound="not a valid user";
 
 const express=require("express");
 const bodyparser=require('body-parser');
@@ -26,7 +26,7 @@ app.get("/signup",function(req,res){
   res.render("signup")
 })
 app.get("/signin",function(req,res){
-  const inc=""
+  const var1="";
 const notfound="not a valid user"
   res.render("signin")
 })
@@ -45,7 +45,7 @@ newclient.save(function(err){
 
 });
 app.post("/signin",function(req,res){
-  const inc=""
+  const var1=""
 const notfound="not a valid user"
   const username=req.body.email;
   const password=req.body.password;
@@ -56,7 +56,7 @@ const notfound="not a valid user"
         res.render("home");
       }
       else{
-      res.render("signin",{inc:notfound});
+      res.render("signin",{var1:notfound});
       }
     }
 
