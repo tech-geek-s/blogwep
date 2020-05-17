@@ -1,6 +1,7 @@
-const var1="";
-const notfound="not a valid user";
 
+var likes=0;
+var title="";
+var content=""
 const express=require("express");
 const bodyparser=require('body-parser');
 const ejs=require('ejs');
@@ -17,6 +18,11 @@ const clientinfo={
   email:String,
   password:String
 };
+const blogdata={
+  title:String,
+  content:String
+}
+const BlogData=mongoose.model("BlogData",blogdata)
 const Client = mongoose.model("Client",clientinfo)
 app.get("/",function(req,res){
 
@@ -28,7 +34,40 @@ app.get("/signup",function(req,res){
 app.get("/signin",function(req,res){
   const var1="";
 const notfound="not a valid user"
-  res.render("signin")
+  res.render("signin",{var1:var1})
+})
+app.get("/blog",function(req,res){
+
+  BlogData.find({},function(err,post){
+          res.render("blog",{likes:likes, title:post, content:post})
+  })
+
+})
+app.post("/blog",function(req,res){
+
+ likes=likes+1
+
+  res.render("blog",{likes:likes,title:title, content:content})
+})
+app.get("/blogsubmit",function(req,res){
+  res.render("blogsubmit")
+})
+app.post("/blogsubmit",function(req,res){
+
+  const newblog= new BlogData({
+    title:req.body.blogtitle,
+    content:req.body.content
+  });
+  newblog.save(function(err){
+    if(!err){
+      console.log("successfully added blog");
+    }
+    else{
+      console.log(err)
+    }
+  })
+        res.redirect("/blog")
+
 })
 app.post("/signup",function(req,res){
 const  newclient = new Client({
@@ -56,7 +95,8 @@ const notfound="not a valid user"
         res.render("home");
       }
       else{
-      res.render("signin",{var1:notfound});
+        var1="notfound";
+      res.render("signin",{var1:var1});
       }
     }
 

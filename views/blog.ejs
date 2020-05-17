@@ -1,0 +1,37 @@
+<%- include("partials/header") -%>
+
+<section>
+
+<div class="firstbox ">
+  <h1><b>H</b>appy <b>S</b>crolling!</h1>
+</div>
+<div class="secondbox col-lg-4 col-sm-4 col-md-4">
+<h3>Title</h3>
+<h5>Description</h5>
+<p>conet Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
+  eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<form class="" action="/blog" method="post">
+<span id="ispan"><%=likes%></span><button class="far fa-thumbs-up fa-1x" id="ispan2" type="submit">like</button></form>
+</div>
+
+<%  BlogData.forEach(function(item) { %>
+    <div class="secondbox col-lg-4 col-sm-4 col-md-4">
+    <h3>Title</h3>
+    <p><%=item.title%></p>
+    <h5>Description</h5>
+    <p><%= item.content %></p>
+    </div>
+<%  });%>
+
+
+
+</section>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- <script type="text/javascript">
+  $("a").innerHTML="ds";
+
+
+<!-- </script> -->
+
+
+<%- include("partials/footer")-%>
