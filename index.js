@@ -188,9 +188,13 @@ app.post("/blog",function(req,res){
 
 app.get("/blogsubmit",function(req,res){
   if(req.isAuthenticated()){
-    res.render("blogsubmit");
+    clientStatus = "/logout"
+    logButton = "Logout"
+    res.render("blogsubmit", {clientStatus: clientStatus, logButton: logButton});
 } else {
-    res.redirect("/login");
+  clientStatus = "/signup"
+  logButton = "signup"
+  res.render("signin", {var1:inc, clientStatus: clientStatus, logButton: logButton});
 }
 })
 
