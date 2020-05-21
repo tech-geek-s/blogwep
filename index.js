@@ -8,6 +8,8 @@ const request=require('request');
 const session=require('express-session');
 const passport=require("passport");
 const passportLocalMongoose=require("passport-local-mongoose");
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const findOrCreate = require('mongoose-findorcreate');
 const app=express();
 
 app.use(express.static("public"));
@@ -39,7 +41,8 @@ const clientSchema= new mongoose.Schema({
 });
 const blogdataSchema=new mongoose.Schema({
   title:String,
-  content:String
+  content:String,
+  likeed:Number
 });
 const answersSchema = new mongoose.Schema({
   description: String,
@@ -54,7 +57,7 @@ const QuestionsSchema=new mongoose.Schema({
 });
 
 clientSchema.plugin(passportLocalMongoose);
-
+clientSchema.plugin(findOrCreate);
 const Client = new mongoose.model("Client",clientSchema);
 const BlogData= new mongoose.model("BlogData",blogdataSchema);
 const Answer = new mongoose.model("Answer", answersSchema);
@@ -71,7 +74,18 @@ passport.deserializeUser(function(id, done) {
     done(err, client);
   });
 });
-
+passport.use(new GoogleStrategy({
+    clientID: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRETS,
+    callbackURL: "https://localhost:3000/auth/google/blog",
+    userProfileURL:"https://www.googleapis.com/oauth2/v3/userinfo"
+  },
+  function(accessToken, refreshToken, profile, cb) {
+    User.findOrCreate({ googleId: profile.id }, function (err, user) {
+      return cb(err, user);
+    });
+  }
+));
 app.get("/",function(req,res){
   if(req.isAuthenticated()){
     clientStatus = "/logout"
@@ -111,7 +125,7 @@ app.get("/questions", function(req,res){
         res.send(err);
       }
     })
-   
+
 } else {
   clientStatus = "/signin"
   logButton = "SignIn"
@@ -122,7 +136,7 @@ app.get("/questions", function(req,res){
       res.send(err);
     }
   })
-    
+
 }
 })
 
@@ -136,7 +150,7 @@ app.get("/ask_question", function(req,res){
   logButton = "SignIn"
     res.render("signin", {var1:inc,clientStatus: clientStatus, logButton: logButton});
 }
- 
+
 })
 
 app.post("/ask_question", function (req, res) {
@@ -177,15 +191,21 @@ app.get("/blog",function(req,res){
 })
 app.post("/blog",function(req,res){
   if(req.isAuthenticated()){
+    clientStatus = "logout"
+    logButton = "Logout"
      likes=likes+1
      BlogData.find({},function(err,foundPost){
-     res.render("blog",{likes:likes, title:foundPost.title, content:foundPost.content, BlogData: foundPost})
+     res.render("blog",{likes:likes, title:foundPost.title, content:foundPost.content, BlogData: foundPost,clientStatus:clientStatus,logButton:logButton})
     })
   } else {
+    clientStatus = "login"
+    logButton = "Login"
     res.redirect("/signin");
   }
 })
-
+app.post("/bloglike",function(req,res){
+  console.log(req.body)
+})
 app.get("/blogsubmit",function(req,res){
   if(req.isAuthenticated()){
     clientStatus = "/logout"
@@ -284,7 +304,7 @@ app.get("/:questionTitle", function(req,res){
   })
 }
 
- 
+
 })
 
 app.post("/:questionId", function(req, res){
@@ -306,7 +326,7 @@ app.post("/:questionId", function(req, res){
       } else {
         res.send(err);
       }
-    }) 
+    })
 
 } else {
   clientStatus = "/signup"
@@ -319,8 +339,8 @@ app.post("/:questionId", function(req, res){
     } else {
       res.send(err);
     }
-  }) 
-}   
+  })
+}
 })
 
 app.listen(3000,function(){
