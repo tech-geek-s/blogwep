@@ -74,18 +74,18 @@ passport.deserializeUser(function(id, done) {
     done(err, client);
   });
 });
-passport.use(new GoogleStrategy({
-    clientID: process.env.CLIENT_ID,
-    clientSecret: process.env.CLIENT_SECRETS,
-    callbackURL: "https://localhost:3000/auth/google/blog",
-    userProfileURL:"https://www.googleapis.com/oauth2/v3/userinfo"
-  },
-  function(accessToken, refreshToken, profile, cb) {
-    User.findOrCreate({ googleId: profile.id }, function (err, user) {
-      return cb(err, user);
-    });
-  }
-));
+// passport.use(new GoogleStrategy({
+//     clientID: process.env.CLIENT_ID,
+//     clientSecret: process.env.CLIENT_SECRETS,
+//     callbackURL: "https://localhost:3000/auth/google/blog",
+//     userProfileURL:"https://www.googleapis.com/oauth2/v3/userinfo"
+//   },
+//   function(accessToken, refreshToken, profile, cb) {
+//     User.findOrCreate({ googleId: profile.id }, function (err, user) {
+//       return cb(err, user);
+//     });
+//   }
+// ));
 app.get("/",function(req,res){
   if(req.isAuthenticated()){
     clientStatus = "/logout"
@@ -204,7 +204,22 @@ app.post("/blog",function(req,res){
   }
 })
 app.post("/bloglike",function(req,res){
-  console.log(req.body)
+  console.log(req.body.likebutton)
+  BlogData.findOne({_id:req.body.likebutton},function(err,item){
+    if(err){console.log(err)}
+    else{
+      likes=item.likeed;
+    }
+  })
+  BlogData.updateOne({_id:req.body.likebutton},{likeed:likes+1},function(err,letsupdate){
+    if(err){
+      console.log(err)
+    }
+    else{
+      res.redirect("/blog")
+    }
+  })
+
 })
 app.get("/blogsubmit",function(req,res){
   if(req.isAuthenticated()){

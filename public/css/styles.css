@@ -341,6 +341,12 @@ display: inline-block;
   text-decoration: none;
   transition: .5s;
 }
+#liked{
+  display: inline-block;
+  color: red;
+display: none;
+  width: 20%;
+}
 
 /* css by me */
 

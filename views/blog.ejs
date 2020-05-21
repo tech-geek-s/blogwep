@@ -26,7 +26,7 @@
     <h5>Description</h5>
     <p><%= item.content %></p>
     <form class="" action="/bloglike" method="POST">
-    <span id="ispan"><%=likes%></span><input class="far fa-thumbs-up fa-1x" id="ispan2" type="checkbox" onChange="this.form.submit()" value="<%=item._id%>" name="likebutton">like</input></form>
+    <span id="ispan"><%=item.likeed%></span><input class="far fa-thumbs-up fa-1x" id="ispan2" type="radio" onClick="this.form.submit()" id="liked" value="<%=item._id%>" name="likebutton"></input></form>
 
     </div>
 <%  });%>
